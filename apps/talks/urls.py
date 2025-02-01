@@ -1,0 +1,8 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.TalkListView.as_view(), name='talk_list'),
+    path('create/', views.TalkCreateView.as_view(), name='talk_create'),
+    path('<int:pk>/', views.TalkDetailView.as_view(), name='talk_detail'),
+]
