@@ -1,0 +1,26 @@
+# Python
+*.pyc
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Entorno virtual
+venv/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Variables de entorno
+.env
+.env.local
+
+# IDEs y editores
+.vscode/
+.idea/
+
+# Archivos de medios y estáticos
+media/
+staticfiles/
