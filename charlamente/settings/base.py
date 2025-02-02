@@ -11,13 +11,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    
     # Local apps    
     'apps.core',
     'apps.users',
     'apps.talks',
+    #third_party_apps
+    'django_celery_results'
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,4 +91,12 @@ LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'talk_list'
     
+
+# Configuración de Celery
+CELERY_BROKER_URL = 'amqp://localhost'  # Conexión con RabbitMQ
+CELERY_RESULT_BACKEND = 'django-db'     # Almacena resultados en la BD
+CELERY_ACCEPT_CONTENT = ['json']        # Formato de mensajes
+CELERY_TASK_SERIALIZER = 'json'         # Serialización de tareas
+CELERY_RESULT_SERIALIZER = 'json'       # Serialización de resultados
+CELERY_TIMEZONE = TIME_ZONE            # Zona horaria
 
