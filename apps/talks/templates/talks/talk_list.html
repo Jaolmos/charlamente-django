@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Mis Charlas - CharlaMente{% endblock %}
+
+{% block content %}
+    <h2>Mis Charlas</h2>
+    <a href="{% url 'talk_create' %}">Subir Nueva Charla</a>
+    
+    {% if talks %}
+        <div>
+            {% for talk in talks %}
+                <div>
+                    <h3>{{ talk.title }}</h3>
+                    <p>Ponente: {{ talk.speaker }}</p>
+                    <p>Estado: {{ talk.get_status_display }}</p>
+                    <a href="{% url 'talk_detail' talk.pk %}">Ver Detalles</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No tienes charlas todavía.</p>
+    {% endif %}
+{% endblock %}

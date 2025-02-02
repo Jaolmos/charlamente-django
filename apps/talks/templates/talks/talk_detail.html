@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ talk.title }} - CharlaMente{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>{{ talk.title }}</h2>
+        <p>Ponente: {{ talk.speaker }}</p>
+        <p>Estado: {{ talk.get_status_display }}</p>
+        
+        {% if talk.transcript %}
+            <div>
+                <h3>Transcripción</h3>
+                <p>{{ talk.transcript }}</p>
+            </div>
+        {% endif %}
+        
+        {% if talk.summary %}
+            <div>
+                <h3>Resumen</h3>
+                <p>{{ talk.summary }}</p>
+            </div>
+        {% endif %}
+
+        <p>Subido: {{ talk.created_at }}</p>
+        
+        <a href="{% url 'talk_list' %}">Volver a mis charlas</a>
+    </div>
+{% endblock %}

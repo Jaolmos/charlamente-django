@@ -2,6 +2,7 @@ from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Talk
+from .forms import TalkForm
 
 class TalkListView(LoginRequiredMixin, ListView):
     model = Talk
@@ -14,8 +15,8 @@ class TalkListView(LoginRequiredMixin, ListView):
 
 class TalkCreateView(LoginRequiredMixin, CreateView):
     model = Talk
+    form_class = TalkForm  # Cambiamos de fields a form_class
     template_name = 'talks/talk_create.html'
-    fields = ['title', 'speaker', 'media_file']
     success_url = reverse_lazy('talk_list')
 
     def form_valid(self, form):
