@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Iniciar Sesión - CharlaMente{% endblock %}
+
+{% block content %}
+<div>
+    <h2>Iniciar Sesión</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <p>¿No tienes cuenta? <a href="{% url 'register' %}">Regístrate</a></p>
+</div>
+{% endblock %}

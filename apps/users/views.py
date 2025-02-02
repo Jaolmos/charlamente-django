@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView
@@ -10,8 +10,14 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True
     success_url = reverse_lazy('talk_list')
 
+'''
 class CustomLogoutView(LogoutView):
-    next_page = 'home'
+    next_page = reverse_lazy('home')
+    '''
+def logout_view(request):
+    logout(request)
+    return redirect('home')  
+
 
 class RegisterView(CreateView):
     model = CustomUser

@@ -83,3 +83,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
+
+# Auth settings
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'talk_list'
+    
+
