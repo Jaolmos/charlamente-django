@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Subir Charla - CharlaMente{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Subir Nueva Charla</h2>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Subir Charla</button>
+        </form>
+
+        <div>
+            <a href="{% url 'talk_list' %}">Volver a mis charlas</a>
+        </div>
+    </div>
+{% endblock %}
