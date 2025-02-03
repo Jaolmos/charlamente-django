@@ -3,6 +3,7 @@ from .models import Talk
 
 @shared_task
 def process_talk(talk_id):
+    print(f"Iniciando procesamiento de talk_id: {talk_id}")  # Log
     talk = Talk.objects.get(id=talk_id)
     try:
         # Actualizar estado a procesando
@@ -17,6 +18,7 @@ def process_talk(talk_id):
         talk.transcript = transcription
         talk.status = 'completed'
         talk.save()
+        # Log
 
     except Exception as e:
         talk.status = 'failed'

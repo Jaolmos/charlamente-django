@@ -22,13 +22,11 @@ class TalkCreateView(LoginRequiredMixin, CreateView):
     template_name = 'talks/talk_create.html'
     
     def form_valid(self, form):
-        # Guardar el Talk y asignar el usuario
         talk = form.save(commit=False)
         talk.user = self.request.user
         talk.status = 'pending'
         talk.save()
-        
-        # Lanzar la tarea asíncrona
+               
         process_talk.delay(talk.id)
         
         return redirect('talk_detail', pk=talk.id)
