@@ -3,27 +3,30 @@
 {% block title %}{{ talk.title }} - CharlaMente{% endblock %}
 
 {% block content %}
-    <div>
-        <h2>{{ talk.title }}</h2>
-        <p>Ponente: {{ talk.speaker }}</p>
-        <p>Estado: {{ talk.get_status_display }}</p>
-        
-        {% if talk.transcript %}
-            <div>
-                <h3>Transcripción</h3>
-                <p>{{ talk.transcript }}</p>
-            </div>
-        {% endif %}
-        
-        {% if talk.summary %}
-            <div>
-                <h3>Resumen</h3>
-                <p>{{ talk.summary }}</p>
-            </div>
-        {% endif %}
+   <div>
+       <h2>{{ talk.title }}</h2>
+       <p>Ponente: {{ talk.speaker }}</p>
+       <p>Estado: {{ talk.get_status_display }}</p>
+       
+       {% if talk.status == 'failed' %}
+           <div>
+               <p>Error: {{ talk.error_message }}</p>
+           </div>
+       {% endif %}
 
-        <p>Subido: {{ talk.created_at }}</p>
-        
-        <a href="{% url 'talk_list' %}">Volver a mis charlas</a>
-    </div>
+       {% if talk.status == 'completed' and talk.transcript %}
+           <div>
+               <h3>Transcripción</h3>
+               <div>
+                   {{ talk.transcript|linebreaks }}
+               </div>
+           </div>
+       {% elif talk.status == 'processing' %}
+           <p>Procesando la transcripción...</p>
+       {% elif talk.status == 'pending' %}
+           <p>En cola para procesar...</p>
+       {% endif %}
+
+       <a href="{% url 'talk_list' %}">Volver a mis charlas</a>
+   </div>
 {% endblock %}

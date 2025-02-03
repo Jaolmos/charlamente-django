@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from apps.users.models import CustomUser
+import uuid
 
 # Create your models here.
 
@@ -35,6 +36,11 @@ class Talk(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.share_token:
+            self.share_token = str(uuid.uuid4())
+        super().save(*args, **kwargs)
 
     class Meta:
         db_table = 'talks'

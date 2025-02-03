@@ -1,8 +1,11 @@
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from .models import Talk
 from .forms import TalkForm
+from .tasks import process_talk
+
 
 class TalkListView(LoginRequiredMixin, ListView):
     model = Talk
@@ -15,13 +18,20 @@ class TalkListView(LoginRequiredMixin, ListView):
 
 class TalkCreateView(LoginRequiredMixin, CreateView):
     model = Talk
-    form_class = TalkForm  # Cambiamos de fields a form_class
+    form_class = TalkForm
     template_name = 'talks/talk_create.html'
-    success_url = reverse_lazy('talk_list')
-
+    
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        # Guardar el Talk y asignar el usuario
+        talk = form.save(commit=False)
+        talk.user = self.request.user
+        talk.status = 'pending'
+        talk.save()
+        
+        # Lanzar la tarea asíncrona
+        process_talk.delay(talk.id)
+        
+        return redirect('talk_detail', pk=talk.id)
 
 class TalkDetailView(LoginRequiredMixin, DetailView):
     model = Talk
