@@ -1,9 +1,11 @@
 <nav>
     <a href="{% url 'home' %}">Inicio</a>
     {% if user.is_authenticated %}
+        <span>{{ user.username }}</span>
         <a href="{% url 'talk_list' %}">Mis Charlas</a>
         <a href="{% url 'talk_create' %}">Subir Charla</a>
         <a href="{% url 'logout' %}">Cerrar Sesión</a>
+
     {% else %}
         <a href="{% url 'login' %}">Iniciar Sesión</a>
         <a href="{% url 'register' %}">Registrarse</a>
