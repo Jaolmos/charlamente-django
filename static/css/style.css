@@ -1,16 +1,20 @@
 :root {
-    /* Variables de color para tema oscuro */
-    --dark-bg: #121212;
-    --dark-surface: #1e1e1e;
+    --dark-bg: #1a1b1e;
+    --dark-surface: #2d2d30;
     --dark-text: #ffffff;
-    --dark-text-secondary: #b3b3b3;
+    --dark-text-secondary: #8e8e8e;
     --accent-color: #7289da;
+    --border-color: #404040;
+    --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-headers: 'Poppins', var(--font-primary);
 }
 
-/* Estilos base */
 body {
     background-color: var(--dark-bg);
     color: var(--dark-text);
+    font-family: var(--font-primary);
+    line-height: 1.5;
+    margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -20,24 +24,537 @@ main {
     flex: 1;
 }
 
-/* Navbar personalizado */
-.navbar {
+/* Header y Nav */
+header {
     background-color: var(--dark-surface);
-    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.navbar a {
+/* Container personalizado */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Mensajes de alerta */
+.messages {
+    margin-bottom: 2rem;
+}
+
+.alert {
+    background-color: var(--dark-surface);
+    border: 1px solid var(--border-color);
+    color: var(--dark-text);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    border-color: #43b581;
+}
+
+.alert-error {
+    border-color: #f04747;
+}
+
+/* Links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
     color: var(--dark-text);
     text-decoration: none;
 }
 
-.navbar a:hover {
-    color: var(--accent-color);
+/* Footer */
+footer {
+    background-color: var(--dark-surface);
+    border-top: 1px solid var(--border-color);
+    padding: 1rem;
+    text-align: center;
+    color: var(--dark-text-secondary);
 }
 
-/* Mensajes de alerta */
-.messages .alert {
-    background-color: var(--dark-surface);
-    border-color: var(--accent-color);
+/* En la sección de estilos de la página de inicio */
+.hero-section .lead {
+    font-size: 1.5rem;
     color: var(--dark-text);
+    margin-bottom: 1rem;
+}
+
+.hero-section .sub-lead {
+    font-size: 1.1rem;
+    color: var(--dark-text-secondary);
+}
+
+/* Footer styles */
+.footer {
+    background-color: var(--dark-surface);
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
+
+.footer p {
+    color: var(--dark-text-secondary);
+    margin: 0;
+}
+
+.footer .brand-name {
+    color: var(--dark-text);
+    font-weight: 600;
+}
+
+.footer .tagline {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .footer .row > div {
+        text-align: center !important;
+        margin-bottom: 0.5rem;
+    }
+    
+    .footer .row > div:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: var(--dark-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+}
+
+.navbar-brand {
+    color: var(--dark-text) !important;  /* Color más claro para el logo */
+    font-weight: 600;
+    font-size: 1.25rem;
+    font-family: var(--font-headers);
+}
+
+.navbar-brand:hover {
+    color: var(--accent-color) !important;
+}
+
+.nav-link {
+    color: var(--dark-text) !important;  /* Mismo color que el texto del footer */
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Dropdown styles */
+.dropdown-menu {
+    background-color: var(--dark-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-item {
+    color: var(--dark-text) !important;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--dark-bg) !important;
+    color: var(--accent-color) !important;
+}
+
+/* Talk list styles */
+.talks-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.talk-card {
+    background-color: var(--dark-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    height: 100%;
+    transition: all 0.2s ease;
+}
+
+.talk-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: var(--accent-color);
+}
+
+.talk-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.talk-title {
+    font-size: 1.25rem;
+    margin: 0;
+    color: var(--dark-text);
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-pending {
+    background-color: #2d3436;
+    color: #ffeaa7;
+}
+
+.status-processing {
+    background-color: #2d3436;
+    color: #74b9ff;
+}
+
+.status-completed {
+    background-color: #2d3436;
+    color: #00b894;
+}
+
+.status-failed {
+    background-color: #2d3436;
+    color: #ff7675;
+}
+
+.speaker {
+    color: var(--dark-text-secondary);
+    margin-bottom: 1rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--dark-text-secondary);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Talk detail styles */
+.talk-detail {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.talk-header {
+    background-color: var(--dark-surface);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.content-section {
+    background-color: var(--dark-surface);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: rgba(0,0,0,0.2);
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--dark-text);
+}
+
+.section-content {
+    padding: 1.5rem;
+    line-height: 1.6;
+    color: var(--dark-text-secondary);
+}
+
+.processing-state, .pending-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--dark-surface);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+}
+
+.processing-state .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+.pending-state .fas {
+    font-size: 3rem;
+    color: var(--dark-text-secondary);
+    opacity: 0.5;
+}
+
+.alert-danger {
+    background-color: rgba(255, 118, 117, 0.1);
+    border-color: #ff7675;
+    color: #ff7675;
+}
+
+/* Upload form styles */
+.upload-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.upload-card {
+    background-color: var(--dark-surface);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: rgba(0,0,0,0.2);
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--dark-text);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.upload-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--dark-text);
+    font-weight: 500;
+}
+
+.form-control, .form-select {
+    background-color: var(--dark-bg) !important;
+    border: 1px solid var(--border-color);
+    color: var(--dark-text) !important;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(114,137,218,0.2);
+    outline: none;
+}
+
+.help-text {
+    font-size: 0.875rem;
+    color: var(--dark-text-secondary);
+    margin-top: 0.25rem;
+}
+
+.error-feedback {
+    color: #ff7675;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* File input styling */
+input[type="file"] {
+    background: none;
+    padding: 0;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--dark-surface);
+    color: var(--dark-text);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 1rem;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headers);
+}
+
+/* Modal styles */
+.modal-content {
+    background-color: var(--dark-surface);
+    border: 1px solid var(--border-color);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+}
+
+.modal-title {
+    color: var(--dark-text);
+}
+
+.btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Card buttons */
+.talk-card-body .btn-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.talk-card-body .btn-group .btn {
+    border-radius: 0.5rem !important;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;  /* Espacio entre icono y texto */
+}
+
+.talk-card-body .btn-outline-light {
+    flex: 1.5;  /* Más espacio para "Ver Detalles" */
+}
+
+.talk-card-body .btn-outline-danger {
+    flex: 1;  /* Menos espacio para "Eliminar" */
+}
+
+/* Quitar los estilos anteriores que causaban el solapamiento */
+.btn-group .btn:first-child,
+.btn-group .btn:last-child {
+    border-radius: 0.5rem !important;
+}
+
+/* Auth styles */
+.auth-container {
+    max-width: 450px;  /* Un poco más ancho que el login */
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.auth-card {
+    background-color: var(--dark-surface);
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.auth-header {
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.auth-header h2 {
+    margin-bottom: 0.5rem;
+    color: var(--dark-text);
+}
+
+.auth-body {
+    padding: 2rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form .form-control {
+    background-color: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    color: #ffffff !important;  /* Color más claro para el texto */
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.auth-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;  /* Placeholder más visible */
+}
+
+/* Para los textos de ayuda debajo de los inputs */
+.auth-form .help-text {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7) !important;  /* Texto de ayuda más visible */
+    margin-top: 0.25rem;
+}
+
+/* Para asegurar que el texto sea visible en todos los navegadores */
+.auth-form input:-webkit-autofill,
+.auth-form input:-webkit-autofill:hover,
+.auth-form input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0px 1000px var(--dark-bg) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.auth-form .btn {
+    padding: 0.75rem;
+    font-weight: 500;
+}
+
+.auth-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.auth-footer a {
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos específicos para el formulario de registro */
+.auth-form .error-message {
+    color: #ff7675;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
 }

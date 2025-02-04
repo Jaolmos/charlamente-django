@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.TalkListView.as_view(), name='talk_list'),
     path('create/', views.TalkCreateView.as_view(), name='talk_create'),
     path('<int:pk>/', views.TalkDetailView.as_view(), name='talk_detail'),
+    path('<int:pk>/delete/', views.TalkDeleteView.as_view(), name='talk_delete'),
 ]

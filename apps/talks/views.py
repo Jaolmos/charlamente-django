@@ -5,6 +5,8 @@ from django.shortcuts import redirect
 from .models import Talk
 from .forms import TalkForm
 from .tasks import process_talk
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import DeleteView
 
 
 class TalkListView(LoginRequiredMixin, ListView):
@@ -37,5 +39,20 @@ class TalkDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'talk'
 
     def get_queryset(self):
-        # Asegura que el usuario solo pueda ver sus propias charlas
+        # Añadimos un print para debug
+        queryset = Talk.objects.filter(user=self.request.user)
+        print("Talk queryset:", queryset)  # Para debug
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print("Context:", context)  # Para debug
+        return context
+    
+class TalkDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Talk
+    success_url = reverse_lazy('talk_list')
+    success_message = "La charla fue eliminada exitosamente."
+
+    def get_queryset(self):
         return Talk.objects.filter(user=self.request.user)

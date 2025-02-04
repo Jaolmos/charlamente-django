@@ -3,17 +3,48 @@
 {% block title %}Subir Charla - CharlaMente{% endblock %}
 
 {% block content %}
-    <div>
-        <h2>Subir Nueva Charla</h2>
+<div class="upload-container">
+    <div class="upload-card">
+        <div class="card-header">
+            <h2><i class="fas fa-cloud-upload-alt"></i> Subir Nueva Charla</h2>
+        </div>
         
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Subir Charla</button>
-        </form>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" class="upload-form">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div class="form-group mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">
+                            {{ field.label }}
+                        </label>
+                        
+                        {% if field.errors %}
+                            {{ field }}
+                            <div class="error-feedback">
+                                {% for error in field.errors %}
+                                    <span class="error-message">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <div class="help-text">{{ field.help_text }}</div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
 
-        <div>
-            <a href="{% url 'talk_list' %}">Volver a mis charlas</a>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload"></i> Subir Charla
+                    </button>
+                    <a href="{% url 'talk_list' %}" class="btn btn-outline-light">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 {% endblock %}

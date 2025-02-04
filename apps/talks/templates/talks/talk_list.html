@@ -3,21 +3,72 @@
 {% block title %}Mis Charlas - CharlaMente{% endblock %}
 
 {% block content %}
-    <h2>Mis Charlas</h2>
-    <a href="{% url 'talk_create' %}">Subir Nueva Charla</a>
+<div class="talks-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Mis Charlas</h2>
+        <a href="{% url 'talk_create' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Subir Nueva Charla
+        </a>
+    </div>
     
     {% if talks %}
-        <div>
+        <div class="row">
             {% for talk in talks %}
-                <div>
-                    <h3>{{ talk.title }}</h3>
-                    <p>Ponente: {{ talk.speaker }}</p>
-                    <p>Estado: {{ talk.get_status_display }}</p>
-                    <a href="{% url 'talk_detail' talk.pk %}">Ver Detalles</a>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="talk-card">
+                        <div class="talk-card-header">
+                            <h3 class="talk-title">{{ talk.title }}</h3>
+                            <span class="status-badge status-{{ talk.status }}">
+                                {{ talk.get_status_display }}
+                            </span>
+                        </div>
+                        <div class="talk-card-body">
+                            <p class="speaker">
+                                <i class="fas fa-user"></i> {{ talk.speaker }}
+                            </p>
+                            <div class="btn-group w-100">
+                                <a href="{% url 'talk_detail' talk.pk %}" class="btn btn-outline-light">
+                                    <i class="fas fa-eye"></i> Ver Detalles
+                                </a>
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ talk.pk }}">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal para cada charla -->
+                    <div class="modal fade" id="deleteModal{{ talk.pk }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirmar eliminación</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro de que deseas eliminar la charla "{{ talk.title }}"? Esta acción no se puede deshacer.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancelar</button>
+                                    <form action="{% url 'talk_delete' talk.pk %}" method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i> Eliminar
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <p>No tienes charlas todavía.</p>
+        <div class="empty-state">
+            <i class="fas fa-microphone-slash empty-icon"></i>
+            <p>No tienes charlas todavía.</p>
+            <p class="text-muted">¡Comienza subiendo tu primera charla!</p>
+        </div>
     {% endif %}
+</div>
 {% endblock %}

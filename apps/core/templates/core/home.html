@@ -3,20 +3,27 @@
 {% block title %}Inicio - CharlaMente{% endblock %}
 
 {% block content %}
-    <div>
-        <h1>Bienvenido a CharlaMente</h1>
-        <p>Transcribe y resume tus charlas de desarrollo personal</p>
+<div class="home-container text-center">
+    <div class="hero-section mb-5">
+        <h1 class="display-4 mb-4">Bienvenido a CharlaMente</h1>
+        <p class="lead mb-3">Transcribe y resume automáticamente tus charlas, conferencias y reuniones</p>
+        <p class="sub-lead mb-5">Convierte audio en texto y obtén resúmenes inteligentes al instante</p>
         
         {% if user.is_authenticated %}
-            <div>
-                <a href="{% url 'talk_create' %}">Subir nueva charla</a>
-                <a href="{% url 'talk_list' %}">Ver mis charlas</a>
+            <div class="action-buttons">
+                <a href="{% url 'talk_create' %}" class="btn btn-primary btn-lg me-3">
+                    <i class="fas fa-plus-circle"></i> Subir nueva charla
+                </a>
+                <a href="{% url 'talk_list' %}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-list"></i> Ver mis charlas
+                </a>
             </div>
         {% else %}
-            <div>
-                <a href="{% url 'login' %}">Iniciar Sesión</a>
-                <a href="{% url 'register' %}">Registrarse</a>
+            <div class="action-buttons">
+                <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-3">Iniciar Sesión</a>
+                <a href="{% url 'register' %}" class="btn btn-outline-light btn-lg">Registrarse</a>
             </div>
         {% endif %}
     </div>
+</div>
 {% endblock %}

@@ -3,41 +3,97 @@
 {% block title %}{{ talk.title }} - CharlaMente{% endblock %}
 
 {% block content %}
-   <div>
-       <h2>{{ talk.title }}</h2>
-       <p>Ponente: {{ talk.speaker }}</p>
-       <p>Estado: {{ talk.get_status_display }}</p>
-       
-       {% if talk.status == 'failed' %}
-           <div>
-               <p>Error: {{ talk.error_message }}</p>
-           </div>
-       {% endif %}
+<div class="talk-detail">
+    <div class="talk-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">{{ talk.title }}</h2>
+            <span class="status-badge status-{{ talk.status }}">
+                {{ talk.get_status_display }}
+            </span>
+        </div>
+        <p class="speaker mt-2">
+            <i class="fas fa-user"></i> {{ talk.speaker }}
+        </p>
+    </div>
 
-       {% if talk.status == 'completed' %}
-           {% if talk.summary %}
-               <div class="summary-section">
-                   <h3>Resumen</h3>
-                   <div class="summary-content">
-                       {{ talk.summary|linebreaks }}
-                   </div>
-               </div>
-           {% endif %}
+    <div class="talk-content">
+        {% if talk.status == 'failed' %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Error:</strong> {{ talk.error_message }}
+            </div>
+        {% endif %}
 
-           {% if talk.transcript %}
-               <div class="transcript-section">
-                   <h3>Transcripción</h3>
-                   <div class="transcript-content">
-                       {{ talk.transcript|linebreaks }}
-                   </div>
-               </div>
-           {% endif %}
-       {% elif talk.status == 'processing' %}
-           <p>Procesando la transcripción...</p>
-       {% elif talk.status == 'pending' %}
-           <p>En cola para procesar...</p>
-       {% endif %}
+        {% if talk.status == 'completed' %}
+            {% if talk.summary %}
+                <div class="content-section mb-4">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-alt"></i> Resumen</h3>
+                    </div>
+                    <div class="section-content">
+                        {{ talk.summary|linebreaks }}
+                    </div>
+                </div>
+            {% endif %}
 
-       <a href="{% url 'talk_list' %}">Volver a mis charlas</a>
-   </div>
+            {% if talk.transcript %}
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-microphone-alt"></i> Transcripción</h3>
+                    </div>
+                    <div class="section-content">
+                        {{ talk.transcript|linebreaks }}
+                    </div>
+                </div>
+            {% endif %}
+        {% elif talk.status == 'processing' %}
+            <div class="processing-state">
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+                <p>Procesando la transcripción...</p>
+                <p class="text-muted">Esto puede tomar unos minutos</p>
+            </div>
+        {% elif talk.status == 'pending' %}
+            <div class="pending-state">
+                <i class="fas fa-clock mb-3"></i>
+                <p>En cola para procesar...</p>
+                <p class="text-muted">Tu charla será procesada pronto</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between">
+        <a href="{% url 'talk_list' %}" class="btn btn-outline-light">
+            <i class="fas fa-arrow-left"></i> Volver a mis charlas
+        </a>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <i class="fas fa-trash-alt"></i> Eliminar Charla
+        </button>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar la charla "{{ talk.title }}"? Esta acción no se puede deshacer.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancelar</button>
+                <form action="{% url 'talk_delete' talk.pk %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
