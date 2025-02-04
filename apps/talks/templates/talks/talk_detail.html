@@ -14,13 +14,24 @@
            </div>
        {% endif %}
 
-       {% if talk.status == 'completed' and talk.transcript %}
-           <div>
-               <h3>Transcripción</h3>
-               <div>
-                   {{ talk.transcript|linebreaks }}
+       {% if talk.status == 'completed' %}
+           {% if talk.summary %}
+               <div class="summary-section">
+                   <h3>Resumen</h3>
+                   <div class="summary-content">
+                       {{ talk.summary|linebreaks }}
+                   </div>
                </div>
-           </div>
+           {% endif %}
+
+           {% if talk.transcript %}
+               <div class="transcript-section">
+                   <h3>Transcripción</h3>
+                   <div class="transcript-content">
+                       {{ talk.transcript|linebreaks }}
+                   </div>
+               </div>
+           {% endif %}
        {% elif talk.status == 'processing' %}
            <p>Procesando la transcripción...</p>
        {% elif talk.status == 'pending' %}

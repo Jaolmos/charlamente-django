@@ -1,7 +1,12 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -100,3 +105,5 @@ CELERY_TASK_SERIALIZER = 'json'         # Serialización de tareas
 CELERY_RESULT_SERIALIZER = 'json'       # Serialización de resultados
 CELERY_TIMEZONE = TIME_ZONE            # Zona horaria
 
+# Configuración de OpenAI
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
