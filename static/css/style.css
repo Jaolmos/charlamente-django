@@ -1,0 +1,43 @@
+:root {
+    /* Variables de color para tema oscuro */
+    --dark-bg: #121212;
+    --dark-surface: #1e1e1e;
+    --dark-text: #ffffff;
+    --dark-text-secondary: #b3b3b3;
+    --accent-color: #7289da;
+}
+
+/* Estilos base */
+body {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navbar personalizado */
+.navbar {
+    background-color: var(--dark-surface);
+    padding: 1rem;
+}
+
+.navbar a {
+    color: var(--dark-text);
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: var(--accent-color);
+}
+
+/* Mensajes de alerta */
+.messages .alert {
+    background-color: var(--dark-surface);
+    border-color: var(--accent-color);
+    color: var(--dark-text);
+}
