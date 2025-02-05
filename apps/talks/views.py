@@ -81,10 +81,10 @@ def talk_status_view(request, pk):
     talk = get_object_or_404(Talk, pk=pk, user=request.user)
     html = render_to_string('talks/includes/status_badge.html', {'talk': talk})
     
-    # Si el estado es final, indicamos a HTMX que detenga las actualizaciones
     headers = {}
     if talk.status in ['completed', 'error']:
-        headers['HX-Reswap'] = 'none'
+        # Forzar una actualización final y recargar la página
+        headers['HX-Refresh'] = 'true'
     
     return HttpResponse(html, headers=headers)
 
