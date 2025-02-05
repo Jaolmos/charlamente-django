@@ -1,0 +1,44 @@
+{% if talk.status == 'failed' %}
+    <div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>Error:</strong> {{ talk.error_message }}
+    </div>
+{% endif %}
+
+{% if talk.status == 'completed' %}
+    {% if talk.summary %}
+        <div class="content-section mb-4">
+            <div class="section-header">
+                <h3><i class="fas fa-file-alt"></i> Resumen</h3>
+            </div>
+            <div class="section-content">
+                {{ talk.summary|linebreaks }}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if talk.transcript %}
+        <div class="content-section">
+            <div class="section-header">
+                <h3><i class="fas fa-microphone-alt"></i> Transcripción</h3>
+            </div>
+            <div class="section-content">
+                {{ talk.transcript|linebreaks }}
+            </div>
+        </div>
+    {% endif %}
+{% elif talk.status == 'processing' %}
+    <div class="processing-state">
+        <div class="spinner-border text-primary mb-3" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p>Procesando la transcripción...</p>
+        <p class="text-muted">Esto puede tomar unos minutos</p>
+    </div>
+{% elif talk.status == 'pending' %}
+    <div class="pending-state">
+        <i class="fas fa-clock mb-3"></i>
+        <p>En cola para procesar...</p>
+        <p class="text-muted">Tu charla será procesada pronto</p>
+    </div>
+{% endif %}

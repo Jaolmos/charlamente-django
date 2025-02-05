@@ -7,7 +7,11 @@
     <div class="talk-header mb-4">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-0">{{ talk.title }}</h2>
-            <span class="status-badge status-{{ talk.status }}">
+            <span class="status-badge status-{{ talk.status }}"
+                  hx-get="{% url 'talk_status' talk.pk %}"
+                  hx-trigger="every 10s"
+                  hx-target="this"
+                  hx-swap="outerHTML">
                 {{ talk.get_status_display }}
             </span>
         </div>
@@ -16,7 +20,10 @@
         </p>
     </div>
 
-    <div class="talk-content">
+    <div class="talk-content"
+         hx-get="{% url 'talk_content' talk.pk %}"
+         hx-trigger="every 10s"
+         hx-target="this">
         {% if talk.status == 'failed' %}
             <div class="alert alert-danger">
                 <i class="fas fa-exclamation-triangle"></i>
