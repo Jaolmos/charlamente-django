@@ -5,6 +5,18 @@ class TalkForm(forms.ModelForm):
     class Meta:
         model = Talk
         fields = ['title', 'speaker', 'media_file']
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'style': 'width: 500px; min-width: 500px; color: #ffffff; background-color: #2d2d30;',
+                'placeholder': 'Ingresa el título de la charla'
+            }),
+            'speaker': forms.TextInput(attrs={
+                'class': 'form-control',
+                'style': 'width: 500px; min-width: 500px; color: #ffffff; background-color: #2d2d30;',
+                'placeholder': 'Nombre del presentador'
+            })
+        }
         
     def clean_media_file(self):
         file = self.cleaned_data.get('media_file')

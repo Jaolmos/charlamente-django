@@ -578,3 +578,23 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: none;
     opacity: 0.8;
 }
+
+/* Estilos para los placeholders */
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+    opacity: 1;
+}
+
+/* Estilos para el texto cuando se está escribiendo */
+.form-control {
+    color: #ffffff !important;
+    background-color: #2d2d30 !important;
+}
+
+/* Estilos para cuando el campo está enfocado */
+.form-control:focus {
+    background-color: #2d2d30 !important;
+    color: #ffffff !important;
+    border-color: #7289da !important;
+    box-shadow: 0 0 0 0.2rem rgba(114, 137, 218, 0.25) !important;
+}
