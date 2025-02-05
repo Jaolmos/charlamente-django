@@ -10,40 +10,40 @@
             <i class="fas fa-plus"></i> Subir Nueva Charla
         </a>
     </div>
-    
+
     {% if talks %}
         <div class="row">
             {% for talk in talks %}
-                <!-- Añadimos id a este div -->
-                <div class="col-md-6 col-lg-4 mb-4" id="talk-card-{{ talk.pk }}">
-                    <div class="talk-card">
-                        <div class="talk-card-header">
-                            <h3 class="talk-title">{{ talk.title }}</h3>
-                            <span class="status-badge status-{{ talk.status }}">
-                                {{ talk.get_status_display }}
-                            </span>
-                        </div>
-                        <div class="talk-card-body">
-                            <p class="speaker">
-                                <i class="fas fa-user"></i> {{ talk.speaker }}
-                            </p>
-                            <div class="btn-group w-100">
-                                <a href="{% url 'talk_detail' talk.pk %}" class="btn btn-outline-light">
-                                    <i class="fas fa-eye"></i> Ver Detalles
-                                </a>
-                                <button type="button" 
-                                        class="btn btn-outline-danger"
-                                        hx-delete="{% url 'talk_delete' talk.pk %}"
-                                        hx-target="#talk-card-{{ talk.pk }}"
-                                        hx-swap="outerHTML swap:500ms"
-                                        hx-confirm="¿Estás seguro de que deseas eliminar la charla '{{ talk.title }}'?"
-                                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-                                    <i class="fas fa-trash-alt"></i> Eliminar
-                                </button>
-                            </div>
+            <div class="col-md-6 col-lg-4 mb-4" id="talk-card-{{ talk.pk }}">
+                <div class="talk-card">
+                    <div class="talk-card-header">
+                        <h3 class="talk-title">{{ talk.title }}</h3>
+                        <span class="status-badge status-{{ talk.status }}"
+                              hx-get="{% url 'talk_status' talk.pk %}"
+                              hx-trigger="every 10s"
+                              hx-target="this"
+                              hx-swap="outerHTML">
+                            {{ talk.get_status_display }}
+                        </span>
+                    </div>
+                    <div class="talk-card-body">
+                        <p class="speaker"><i class="fas fa-user"></i> {{ talk.speaker }}</p>
+                        <div class="btn-group w-100">
+                            <a href="{% url 'talk_detail' talk.pk %}" class="btn btn-outline-light">
+                                <i class="fas fa-eye"></i> Ver Detalles
+                            </a>
+                            <button class="btn btn-outline-danger"
+                                    hx-delete="{% url 'talk_delete' talk.pk %}"
+                                    hx-target="#talk-card-{{ talk.pk }}"
+                                    hx-swap="outerHTML swap:500ms"
+                                    hx-confirm="¿Estás seguro de que deseas eliminar la charla '{{ talk.title }}'?"
+                                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     {% else %}

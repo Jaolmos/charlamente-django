@@ -1,0 +1,7 @@
+<span class="status-badge status-{{ talk.status }}"
+      hx-get="{% url 'talk_status' talk.pk %}"
+      hx-trigger="every 5s"
+      hx-target="this"
+      hx-swap="outerHTML">
+    {{ talk.get_status_display }}
+</span>
