@@ -558,3 +558,23 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0.25rem;
     display: block;
 }
+
+/* HTMX Animations */
+.htmx-swapping {
+    opacity: 0;
+    transition: opacity 500ms ease-out;
+}
+
+.htmx-indicator {
+    display: none;
+}
+
+.htmx-request .htmx-indicator {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.htmx-request.btn-outline-danger {
+    pointer-events: none;
+    opacity: 0.8;
+}

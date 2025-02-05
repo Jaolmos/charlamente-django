@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -5,6 +6,7 @@ from django.shortcuts import redirect
 from .models import Talk
 from .forms import TalkForm
 from .tasks import process_talk
+
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import DeleteView
 
@@ -56,3 +58,15 @@ class TalkDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def get_queryset(self):
         return Talk.objects.filter(user=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        # Obtener y eliminar la charla
+        self.object = self.get_object()
+        self.object.delete()
+
+        # Si es una petición HTMX, devolver respuesta vacía
+        if request.headers.get('HX-Request'):
+            return HttpResponse('')
+        
+        # Si no es HTMX, comportamiento normal (redirección)
+        return super().delete(request, *args, **kwargs)
