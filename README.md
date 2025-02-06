@@ -145,5 +145,19 @@ celery -A charlamente worker -l info
 - RabbitMQ
 - FFmpeg (para procesamiento de audio)
 
+## Capturas de Pantalla
+
+### Página Principal
+![Página Principal](docs/images/home.png)
+
+### Lista de Charlas
+![Mis Charlas](docs/images/talks_list.png)
+
+### Subir Nueva Charla
+![Subir Charla](docs/images/upload_talk.png)
+
+### Detalle de Charla
+![Detalle de Charla](docs/images/talk_detail.png)
+
 ---
 
