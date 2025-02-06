@@ -606,3 +606,12 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
 }
+
+/* Ajuste de visibilidad para estados de procesamiento */
+.processing-state p, .pending-state p {
+    color: #ffffff;  /* Texto principal en blanco puro */
+}
+
+.processing-state .text-muted, .pending-state .text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;  /* Texto secundario más visible */
+}
