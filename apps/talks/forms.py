@@ -5,6 +5,9 @@ class TalkForm(forms.ModelForm):
     class Meta:
         model = Talk
         fields = ['title', 'speaker', 'media_file']
+        labels = {
+            'title': 'Título'
+        }
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',

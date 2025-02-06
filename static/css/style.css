@@ -598,3 +598,11 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #7289da !important;
     box-shadow: 0 0 0 0.2rem rgba(114, 137, 218, 0.25) !important;
 }
+
+/* Centrado vertical para la página principal */
+.home-container {
+    min-height: calc(100vh - 200px);  /* Altura total menos header y footer */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
