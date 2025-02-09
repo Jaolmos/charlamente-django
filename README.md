@@ -65,9 +65,8 @@ charlamente/
 │── venv/ # Entorno virtual (no versionado)
 │── .env # Variables de entorno (no versionado)
 │── .env.example # Ejemplo de variables de entorno
-│── .gitignore # Configuración de Git
-│── db.sqlite3 # Base de datos (no versionado)
-│── manage.py # Script de gestión de Django
+│── .gitignore 
+│── manage.py 
 │── requirements.txt # Dependencias del proyecto
 ```
 
